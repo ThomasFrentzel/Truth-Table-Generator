@@ -3,49 +3,50 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner leitor = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         String formula;
-        boolean tabOk = false;
+        boolean isTableValid = false;
 
-        TabelaVerdade tb = new TabelaVerdade();
+        TruthTable truthTable = new TruthTable();
 
-        System.out.print("Entre com a formula: ");
-        formula = leitor.nextLine();
+        System.out.print("Enter the formula: ");
+        formula = input.nextLine();
         formula = formula.toLowerCase();
 
         switch(formula.length()) {
             case 1:
-                tabOk = tb.achaFormulaCom1Variavel(formula);
+                isTableValid = truthTable.findFormulaWith1Variable(formula);
                 break;
             case 2:
-                tabOk = tb.achaFormulaCom1Variavel(formula);
+                isTableValid = truthTable.findFormulaWith1Variable(formula);
                 break;
             case 3:
-                tabOk = tb.achaFormulaCom2Variaveis(formula);
+                isTableValid = truthTable.findFormulaWith2Variables(formula);
                 break;
             case 4:
-                tabOk = tb.achaFormulaCom2Variaveis(formula);
+                isTableValid = truthTable.findFormulaWith2Variables(formula);
                 break;
             case 5:
-                if (formula.equals("~p^~q") || formula.equals("~pv~q")){
-                    tabOk = tb.achaFormulaCom2Variaveis(formula);
-                    break;}
-                else {
-                    tabOk = tb.achaFormulaCom3Variaveis(formula);
-                    break;}
+                if (formula.equals("~p^~q") || formula.equals("~pv~q")) {
+                    isTableValid = truthTable.findFormulaWith2Variables(formula);
+                    break;
+                } else {
+                    isTableValid = truthTable.findFormulaWith3Variables(formula);
+                    break;
+                }
             case 6:
-                tabOk = tb.achaFormulaCom3Variaveis(formula);
+                isTableValid = truthTable.findFormulaWith3Variables(formula);
                 break;
             case 7:
-                tabOk = tb.achaFormulaCom3Variaveis(formula);
+                isTableValid = truthTable.findFormulaWith3Variables(formula);
                 break;
             case 8:
-                tabOk = tb.achaFormulaCom3Variaveis(formula);
+                isTableValid = truthTable.findFormulaWith3Variables(formula);
             default:
-                tabOk = false;
+                isTableValid = false;
         }
-        if (!tabOk)
-            leitor.close();
-    }}
-
-
+        
+        if (!isTableValid)
+            input.close();
+    }
+}
