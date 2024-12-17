@@ -1,28 +1,27 @@
 package com.company;
 
 
-public class TabelaVerdade {
+public class TruthTable  {
 
     public char printBit(boolean p) {
         if (p)
-            return 'V';
+            return 'T';
         else
             return 'F';
     }
 
-    public void printFormula (String formulaCorreta) {
-        System.out.print(" (" + formulaCorreta + ") ");
+    public void printFormula (String Correctformula) {
+        System.out.print(" (" + Correctformula + ") ");
     }
 
-    //tabela com uma variavel
-    public void tabelaUmLiteral(String formulaCorreta) {
+    public void table1Literal(String Correctformula) {
         int i;
 
         boolean p, resp;
 
         System.out.println("+---+");
         System.out.print  ("| p |");
-        printFormula (formulaCorreta);
+        printFormula (Correctformula);
         System.out.println();
         System.out.println("+---+");
 
@@ -37,7 +36,7 @@ public class TabelaVerdade {
             }
 
 
-            resp = (formulaCorreta.charAt(0)=='~')? !p : p;
+            resp = (Correctformula.charAt(0)=='~')? !p : p;
             System.out.print ("| " + printBit(p) + " |  ");
             System.out.println(printBit(resp) );
 
@@ -46,14 +45,13 @@ public class TabelaVerdade {
 
     }
 
-    //tabela com duas variaveis
-    public void tabelaDoisLiterais(String formulaCorreta) {
+    public void table2Literal(String Correctformula) {
         int i;
         boolean p, q, resp = true;
 
         System.out.println("+---+---+");
         System.out.print  ("| p | q |");
-        printFormula (formulaCorreta);
+        printFormula (Correctformula);
         System.out.println();
         System.out.println("+---+---+");
         for (i = 3; i >= 0; i--) {
@@ -70,14 +68,14 @@ public class TabelaVerdade {
                 default:
                     p = false; q = false;
             }
-            if (formulaCorreta.length() == 3)
-                resp = formulaCorreta.charAt(1) == '^'? p && q: p || q;
-            else if (formulaCorreta.length() == 4) {
-                if (formulaCorreta.charAt(0)=='~')
-                    resp = formulaCorreta.charAt(2) == '^'? (!p && q) : (!p || q);
-                else if (formulaCorreta.charAt(2)=='˜')
-                    resp = formulaCorreta.charAt(1) == 'ˆ'? (p && !q): (p || !q);
-                else if (formulaCorreta.length() == 5) {
+            if (Correctformula.length() == 3)
+                resp = Correctformula.charAt(1) == '^'? p && q: p || q;
+            else if (Correctformula.length() == 4) {
+                if (Correctformula.charAt(0)=='~')
+                    resp = Correctformula.charAt(2) == '^'? (!p && q) : (!p || q);
+                else if (Correctformula.charAt(2)=='˜')
+                    resp = Correctformula.charAt(1) == 'ˆ'? (p && !q): (p || !q);
+                else if (Correctformula.length() == 5) {
                 }
 
             }
@@ -89,13 +87,12 @@ public class TabelaVerdade {
     }
 
 
-    //tabela com tres variaveis
-    public void tabelaTresLiterais (String formulaCorreta) {
+    public void table3Literal (String Correctformula) {
         int i;
         boolean p, q, r, resp = true;
 
         System.out.println("+-----+-----+-----+");
-        System.out.println("|  p  |  q  |  r  |  "+ formulaCorreta );
+        System.out.println("|  p  |  q  |  r  |  "+ Correctformula );
         System.out.println("+-----+-----+-----+");
 
         for (i = 7; i >= 0; i--) {
@@ -125,119 +122,117 @@ public class TabelaVerdade {
                     p = false; q = false; r = false;
             }
 
-            if (formulaCorreta.length() == 5) {
+            if (Correctformula.length() == 5) {
                 //******************
-                //Sem negação
+                //Without denial
                 //******************
-                if ((formulaCorreta.charAt(1)) == '^' && (formulaCorreta.charAt(3) == '^'))
+                if ((Correctformula.charAt(1)) == '^' && (Correctformula.charAt(3) == '^'))
                     resp = p && q && r;
-                else if ((formulaCorreta.charAt(1)) == '^' && (formulaCorreta.charAt(3) == 'v'))
+                else if ((Correctformula.charAt(1)) == '^' && (Correctformula.charAt(3) == 'v'))
                     resp = p && q || r;
-                else if ((formulaCorreta.charAt(1)) == 'v' && (formulaCorreta.charAt(3) == 'v'))
+                else if ((Correctformula.charAt(1)) == 'v' && (Correctformula.charAt(3) == 'v'))
                     resp = p || q || r;
-                else if ((formulaCorreta.charAt(1)) == 'v' && (formulaCorreta.charAt(3) == '^'))
+                else if ((Correctformula.charAt(1)) == 'v' && (Correctformula.charAt(3) == '^'))
                     resp = p || q && r;
-            } else if (formulaCorreta.length() == 6) {
+            } else if (Correctformula.length() == 6) {
                 //******************
-                //Somente uma negação
+                //Only one denial
                 //******************
 
                 //EX: ~p^q^r
-                if ((formulaCorreta.charAt(0)) == '~') {
-                    if ((formulaCorreta.charAt(2)) == '^' && (formulaCorreta.charAt(4) == '^'))
+                if ((Correctformula.charAt(0)) == '~') {
+                    if ((Correctformula.charAt(2)) == '^' && (Correctformula.charAt(4) == '^'))
                         resp = !p && q && r;
-                    else if ((formulaCorreta.charAt(2)) == '^' && (formulaCorreta.charAt(4) == 'v'))
+                    else if ((Correctformula.charAt(2)) == '^' && (Correctformula.charAt(4) == 'v'))
                         resp = !p && q || r;
-                    else if ((formulaCorreta.charAt(2)) == 'v' && (formulaCorreta.charAt(4) == 'v'))
+                    else if ((Correctformula.charAt(2)) == 'v' && (Correctformula.charAt(4) == 'v'))
                         resp = !p || q || r;
-                    else if ((formulaCorreta.charAt(2)) == 'v' && (formulaCorreta.charAt(4) == '^'))
+                    else if ((Correctformula.charAt(2)) == 'v' && (Correctformula.charAt(4) == '^'))
                         resp = !p || q && r;
                 }
                 //EX: p^~q^r
-                if ((formulaCorreta.charAt(2)) == '~') {
-                    if ((formulaCorreta.charAt(1)) == '^' && (formulaCorreta.charAt(4) == '^'))
+                if ((Correctformula.charAt(2)) == '~') {
+                    if ((Correctformula.charAt(1)) == '^' && (Correctformula.charAt(4) == '^'))
                         resp = p && !q && r;
-                    else if ((formulaCorreta.charAt(1)) == '^' && (formulaCorreta.charAt(4) == 'v'))
+                    else if ((Correctformula.charAt(1)) == '^' && (Correctformula.charAt(4) == 'v'))
                         resp = p && !q || r;
-                    else if ((formulaCorreta.charAt(1)) == 'v' && (formulaCorreta.charAt(4) == 'v'))
+                    else if ((Correctformula.charAt(1)) == 'v' && (Correctformula.charAt(4) == 'v'))
                         resp = p || !q || r;
-                    else if ((formulaCorreta.charAt(1)) == 'v' && (formulaCorreta.charAt(4) == '^'))
+                    else if ((Correctformula.charAt(1)) == 'v' && (Correctformula.charAt(4) == '^'))
                         resp = p || !q && r;
                 }
 
                 //EX: p^q^~r
-                if ((formulaCorreta.charAt(4)) == '~') {
-                    if ((formulaCorreta.charAt(1)) == '^' && (formulaCorreta.charAt(3) == '^'))
+                if ((Correctformula.charAt(4)) == '~') {
+                    if ((Correctformula.charAt(1)) == '^' && (Correctformula.charAt(3) == '^'))
                         resp = p && q && !r;
-                    else if ((formulaCorreta.charAt(1)) == '^' && (formulaCorreta.charAt(3) == 'v'))
+                    else if ((Correctformula.charAt(1)) == '^' && (Correctformula.charAt(3) == 'v'))
                         resp = p && q || !r;
-                    else if ((formulaCorreta.charAt(1)) == 'v' && (formulaCorreta.charAt(3) == 'v'))
+                    else if ((Correctformula.charAt(1)) == 'v' && (Correctformula.charAt(3) == 'v'))
                         resp = p || q || !r;
-                    else if ((formulaCorreta.charAt(1)) == 'v' && (formulaCorreta.charAt(3) == '^'))
+                    else if ((Correctformula.charAt(1)) == 'v' && (Correctformula.charAt(3) == '^'))
                         resp = p || q && !r;
                 }
                 //******************
-                //Fim - Somente uma negação
+                //End - Only one denial
                 //******************
-            } else if (formulaCorreta.length() == 7) {
+            } else if (Correctformula.length() == 7) {
                 //********************
-                // 2 Negações
+                // 2 Denials
                 //********************
                 //EX: ~p^~q^r
-                if ( ((formulaCorreta.charAt(0)) == '~') && ((formulaCorreta.charAt(3)) == '~') )  {
-                    if ((formulaCorreta.charAt(2)) == '^' && (formulaCorreta.charAt(5) == '^'))
+                if ( ((Correctformula.charAt(0)) == '~') && ((Correctformula.charAt(3)) == '~') )  {
+                    if ((Correctformula.charAt(2)) == '^' && (Correctformula.charAt(5) == '^'))
                         resp = !p && !q && r;
-                    else if ((formulaCorreta.charAt(2)) == '^' && (formulaCorreta.charAt(5) == 'v'))
+                    else if ((Correctformula.charAt(2)) == '^' && (Correctformula.charAt(5) == 'v'))
                         resp = !p && !q || r;
-                    else if ((formulaCorreta.charAt(2)) == 'v' && (formulaCorreta.charAt(5) == 'v'))
+                    else if ((Correctformula.charAt(2)) == 'v' && (Correctformula.charAt(5) == 'v'))
                         resp = !p || !q || r;
-                    else if ((formulaCorreta.charAt(2)) == 'v' && (formulaCorreta.charAt(5) == '^'))
+                    else if ((Correctformula.charAt(2)) == 'v' && (Correctformula.charAt(5) == '^'))
                         resp = !p || !q && r;
                 }
 
                 //EX: ~p^q^~r
-                if ( ((formulaCorreta.charAt(0)) == '~') && ((formulaCorreta.charAt(5)) == '~') )  {
-                    if ((formulaCorreta.charAt(2)) == '^' && (formulaCorreta.charAt(4) == '^'))
+                if ( ((Correctformula.charAt(0)) == '~') && ((Correctformula.charAt(5)) == '~') )  {
+                    if ((Correctformula.charAt(2)) == '^' && (Correctformula.charAt(4) == '^'))
                         resp = !p && q && !r;
-                    else if ((formulaCorreta.charAt(2)) == '^' && (formulaCorreta.charAt(4) == 'v'))
+                    else if ((Correctformula.charAt(2)) == '^' && (Correctformula.charAt(4) == 'v'))
                         resp = !p && q || !r;
-                    else if ((formulaCorreta.charAt(2)) == 'v' && (formulaCorreta.charAt(4) == 'v'))
+                    else if ((Correctformula.charAt(2)) == 'v' && (Correctformula.charAt(4) == 'v'))
                         resp = !p || q || !r;
-                    else if ((formulaCorreta.charAt(2)) == 'v' && (formulaCorreta.charAt(4) == '^'))
+                    else if ((Correctformula.charAt(2)) == 'v' && (Correctformula.charAt(4) == '^'))
                         resp = !p || q && !r;
                 }
 
                 //EX: p^~q^~r
-                if ( ((formulaCorreta.charAt(2)) == '~') && ((formulaCorreta.charAt(5)) == '~') )  {
-                    if ((formulaCorreta.charAt(1)) == '^' && (formulaCorreta.charAt(4) == '^'))
+                if ( ((Correctformula.charAt(2)) == '~') && ((Correctformula.charAt(5)) == '~') )  {
+                    if ((Correctformula.charAt(1)) == '^' && (Correctformula.charAt(4) == '^'))
                         resp = p && !q && !r;
-                    else if ((formulaCorreta.charAt(1)) == '^' && (formulaCorreta.charAt(4) == 'v'))
+                    else if ((Correctformula.charAt(1)) == '^' && (Correctformula.charAt(4) == 'v'))
                         resp = p && !q || !r;
-                    else if ((formulaCorreta.charAt(1)) == 'v' && (formulaCorreta.charAt(4) == 'v'))
+                    else if ((Correctformula.charAt(1)) == 'v' && (Correctformula.charAt(4) == 'v'))
                         resp = p || !q || !r;
-                    else if ((formulaCorreta.charAt(1)) == 'v' && (formulaCorreta.charAt(4) == '^'))
+                    else if ((Correctformula.charAt(1)) == 'v' && (Correctformula.charAt(4) == '^'))
                         resp = p || !q && !r;
                 }
                 //********************
-                // Fim - 2 Negações
+                // End - 2 Negations
                 //********************                
 
-            } else if (formulaCorreta.length() == 8) {
+            } else if (Correctformula.length() == 8) {
                 //********************
-                // 3 Negações
+                // 3 Denials
                 //********************                
 
                 //EX: ~p^~q^~r
-                if ((formulaCorreta.charAt(0)) == '~' && (formulaCorreta.charAt(3) == '~')  && (formulaCorreta.charAt(6) == '~')) {
-                    if ((formulaCorreta.charAt(2)) == '^' && (formulaCorreta.charAt(5) == '^'))
+                if ((Correctformula.charAt(0)) == '~' && (Correctformula.charAt(3) == '~')  && (Correctformula.charAt(6) == '~')) {
+                    if ((Correctformula.charAt(2)) == '^' && (Correctformula.charAt(5) == '^'))
                         resp = !p && !q && !r;
                 }
                 //********************
-                // Fim - 3 Negações
+                // End - 3 Negations
                 //********************                
             }
-
-
 
 
             //resp = true;
@@ -247,19 +242,19 @@ public class TabelaVerdade {
         System.out.println("+-----+-----+-----+");
     }
 
-    //verifica formula com 1 variavel
-    public boolean achaFormulaCom1Variavel(String formula) {
+        // check formula with 1 variable
+    public boolean findFormulaWith1Variable(String formula) {
         if ((formula.charAt(0) == '~' && formula.charAt(1) == 'p')||
                 (formula.charAt(0) == 'p' && formula.length()   == 1)) {
-            tabelaUmLiteral (formula);
+            table1Literal (formula);
             return true;
         }else
-            System.out.print("Fórmula incorreta!");
+            System.out.print("Incorrect formula!");
             return false;
     }
 
-    //verifica formula com 2 variaveis
-    public boolean achaFormulaCom2Variaveis(String formula) {
+        // check formula with 2 variables
+    public boolean findFormulaWith2Variables(String formula) {
         boolean formOk;
         if ((formula.length() == 3) &&
                 (formula.charAt(0) == 'p') &&
@@ -299,14 +294,14 @@ public class TabelaVerdade {
                 formOk = false;
         }else
             formOk = false;
-            System.out.print("Fórmula incorreta!");
+            System.out.print("Incorrect formula!");
     if (formOk)
-        tabelaDoisLiterais(formula);
+        tableTwoLiteral(formula);
         return formOk;
     }
 
-    //verifica formula com 3 variaveis
-    public boolean achaFormulaCom3Variaveis(String formula) {
+    // check formula with 3 variables
+    public boolean findFormulaWith3Variables(String formula) {
         boolean formOk;
         if ((formula.length() == 5) &&
                 (formula.charAt(0) == 'p') &&
@@ -411,9 +406,9 @@ public class TabelaVerdade {
 
         else {
             formOk = false;
-            System.out.print("Fórmula incorreta!");}
+            System.out.print("Incorrect formula!");}
     if (formOk)
-        tabelaTresLiterais(formula);
+        tableTresLiterais(formula);
         return formOk;
     }
 }
