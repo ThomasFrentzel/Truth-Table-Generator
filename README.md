@@ -55,16 +55,6 @@ To get started, clone the repository:
 git clone https://github.com/ThomasFrentzel/Truth-Table-Generator
 ```
 
-## Cloning the Repository
-
-Ensure you have Java installed on your system.
-
-Compile the program using the javac command:
-
-```bash
-javac TruthTable.java
-```
-
 Modify the main method in TruthTable to test different formulas. For example:
 
 ```bash
