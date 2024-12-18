@@ -66,5 +66,8 @@ public static void main(String[] args) {
 }
 
 ```
+## Authors
 
+- [Thomas Frentzel](https://github.com/ThomasFrentzel)
+- [Théo César](https://github.com/theocesar)
 
