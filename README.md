@@ -66,6 +66,12 @@ public static void main(String[] args) {
 }
 
 ```
+## Cloning the Repository
+
+```bash
+git clone https://github.com/ThomasFrentzel/Truth-Table-Generator
+```
+
 ## Authors
 
 - [Thomas Frentzel](https://github.com/ThomasFrentzel)
